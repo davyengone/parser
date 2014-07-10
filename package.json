@@ -1,0 +1,11 @@
+{
+  "name": "parser",
+  "main": "index.html",
+  "scripts": {
+    "start": "nodewebkit"
+  },
+  "dependencies": {
+    "jquery": "^2.1.1",
+    "readline": "0.0.3"
+  }
+}
