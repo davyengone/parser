@@ -64,14 +64,38 @@ var actionToken = {
 	},
 	constant: function(obj, element) {
 		var values = $(element).parent().next();
-
-		debugger;
 		var row =  $('table tr', $(values))[1];
 		var column = $('td', $(row))[2]
 		obj.value = $(column).text().trim();
 		return obj;
 	},
 	map: function(obj, element) {
+		var values = $(element).parent().next().next().next().next();
+		obj.xArray = [];
+		obj.yArray = [];
+		obj.mapArray = [];
+
+		var rows =  $('table tr', $(values));
+		rows.each(function(i, row){
+			if(i === 0){
+				var columns = $('th', $(row));
+				columns.each(function(i, column){
+					obj.xArray.push($(column).text());
+				});
+			}else{
+				var columns = $('td', $(row));
+				var yValue = $('th', $(row)).text();
+				obj.yArray.push(yValue);
+				columns.each(function(i, column){
+					var value = $(column).text();
+
+					if(i > 1){
+						obj.mapArray.push(value);
+					}
+				});
+			}
+		});
+		return obj;
 	}
 }
 
@@ -90,12 +114,12 @@ var parse = function() {
 			}
 
 			if (obj.name.indexOf(token.calibration) > 0) {
-				//mapArray.push(actionToken['calibration'](obj, item));
+				mapArray.push(actionToken['calibration'](obj, item));
 				return;
 			}
 
 			if (obj.name.indexOf(token.curve) > 0) {
-				//mapArray.push(actionToken['curve'](obj, item));
+				mapArray.push(actionToken['curve'](obj, item));
 				return;
 			}
 
@@ -106,22 +130,12 @@ var parse = function() {
 
 
 			if (obj.name.indexOf(token.map) > 0) {
-				//mapArray.push(actionToken['map'](obj, item));
+				mapArray.push(actionToken['map'](obj, item));
 				return;
 			}
 		});
 		
+		debugger;
 	});
-
-
-	// var reader = readline(filename);
-	// reader.on('line', function(line){
-	// 	document.getElementById('result').value = line;
-	// 	if (map.indexOf()) {};
-	// });
-
-	// reader.on('error', function(line){
-	// 	debugger;
-	// });
 }
 
