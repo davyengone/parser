@@ -99,6 +99,27 @@ var actionToken = {
 	}
 }
 
+var writeToken = {
+	curve: function(obj){
+		
+	},
+	calibration: function(obj) {
+		var format = obj.name + ' = [';
+		obj.values.each(function(i, value){
+			format += value + ',';
+		});
+		format += ']';
+
+		fs.writeFile('message.m', format, function (err) {
+		  if (err) throw err;
+		  debugger;
+		  console.log('It\'s saved!');
+		});
+	},
+	constant: function(obj) {},
+	map: function(obj){}
+}
+
 var parse = function() {
 	var filename = document.getElementById('file').value;
 	var mapArray = [];
@@ -134,8 +155,31 @@ var parse = function() {
 				return;
 			}
 		});
-		
+
 		debugger;
+		mapArray.each(function(i, obj) {
+			debugger;
+			if (obj.name.indexOf(token.calibration) > 0) {
+				writeToken['calibration'](obj, item);
+				return;
+			}
+
+			// if (obj.name.indexOf(token.curve) > 0) {
+			// 	mapArray.push(actionToken['curve'](obj, item));
+			// 	return;
+			// }
+
+			// if (obj.name.indexOf(token.constant) > 0) {
+			// 	mapArray.push(actionToken['constant'](obj, item));
+			// 	return;
+			// }
+
+
+			// if (obj.name.indexOf(token.map) > 0) {
+			// 	mapArray.push(actionToken['map'](obj, item));
+			// 	return;
+			// }
+		});
 	});
 }
 
