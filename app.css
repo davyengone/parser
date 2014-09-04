@@ -1,0 +1,15 @@
+body{
+
+}
+
+.box{
+	display: inline-block;
+	width: 300px;
+	border: 1px solid;
+	border-radius: 6px;
+	padding: 1%;
+	float: left;
+	height: 200px;
+	margin: 1%;
+	text-align: center;
+}

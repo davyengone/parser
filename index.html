@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="parser">
   <head>
-    <title>Hello World!</title>
-    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <title>Calibration tool parser</title>
+    <link rel="stylesheet" href="bower_components/animate-css/animate.min.css">
+    <link rel="stylesheet" href="app.css">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
   </head>
-  <body>
+  <body ng-controller="MainController">
     <h1>DCM Parser!</h1>
     <input id="file" type="file">
 	<br>
-    <input type="button" value="Parse" onclick="parse()">
+    <input type="button" value="Parse" ng-click="parse()">
     <br>
-    <textarea id="result" cols="30" rows="10">
-    	
-    </textarea>
+    <div ng-repeat="item in items">
+      <div class="box animated bounceIn">
+          <span>{{item.name}}</span>
+      </div>
+    </div>
     <div id="cache" style="display: none;"/>
     <script src="app.js"></script>
+    <script src="parser.js"></script>
   </body>
 </html>
